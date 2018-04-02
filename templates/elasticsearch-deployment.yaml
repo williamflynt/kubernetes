@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: pelias-elasticsearch
+spec:
+  replicas: 1
+  minReadySeconds: 60
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: pelias-elasticsearch
+    spec:
+      containers:
+        - name: pelias-elasticsearch
+          image: pelias/elasticsearch:latest
+          volumeMounts:
+            - name: data-volume
+              mountPath: /usr/share/elasticsearch/data
+          resources:
+            limits:
+              memory: 2Gi
+              cpu: 3
+            requests:
+              memory: 2Gi
+              cpu: 0.1
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 9200
+            initialDelaySeconds: 20
+      volumes:
+        - name: data-volume
+          emptyDir: {}
