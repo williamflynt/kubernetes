@@ -30,7 +30,10 @@ data:
         },
         "customBoosts": {
             "layer": {
-                "locality": 5
+              "locality": 2
+            },
+            "source": {
+              "whosonfirst": 2
             }
         },
         "attributionURL": "{{ .Values.apiAttributionURL }}",
