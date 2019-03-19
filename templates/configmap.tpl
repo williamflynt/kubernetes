@@ -28,6 +28,11 @@ data:
         "autocomplete": {
           "exclude_address_length": {{ .Values.api.autocomplete.exclude_address_length | default 0 }}
         },
+        "customBoosts": {
+            "layer": {
+                "locality": 1
+            }
+        },
         "attributionURL": "{{ .Values.apiAttributionURL }}",
         "indexName": "{{ .Values.apiIndexName }}",
         "services": {
